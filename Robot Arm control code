@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Robot Arm Control Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+      padding: 40px;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 34px;
+      color: #222;
+      margin-bottom: 30px;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .slider-container {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 25px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .slider-label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      display: block;
+      color: #555;
+    }
+
+    .slider {
+      width: 100%;
+      margin-bottom: 25px;
+      appearance: none;
+      height: 8px;
+      background: #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #3cb371;
+      box-shadow: 0 0 8px #3cb371;
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #3cb371;
+      box-shadow: 0 0 8px #3cb371;
+      cursor: pointer;
+    }
+
+    .button-group {
+      margin: 30px 0;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 14px;
+      border: none;
+      background-color: #6a5acd;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #483d8b;
+    }
+
+    /* جدول */
+    table {
+      margin: 60px auto 0;
+      border-collapse: collapse;
+      width: 80%;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.07);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 20px;
+      border: 1px solid #eee;
+    }
+
+    th {
+      background-color: #6a5acd;
+      color: white;
+      font-weight: 600;
+    }
+
+    .action-btn {
+      padding: 5px 12px;
+      background-color: #3cb371;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 0 2px;
+    }
+
+    .action-btn:hover {
+      background-color: #2e8b57;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Robot Arm Control Panel</h2>
+
+  <div class="slider-container">
+    <form action="poses1.php" method="post">
+      <label class="slider-label">Motor 1 Position: <span id="motor1Value">90</span></label>
+      <input type="range" name="motor1" min="0" max="180" value="90" class="slider" id="motor1Slider">
+
+      <label class="slider-label">Motor 2 Position: <span id="motor2Value">90</span></label>
+      <input type="range" name="motor2" min="0" max="180" value="90" class="slider" id="motor2Slider">
+
+      <div class="button-group">
+        <button type="button" class="btn" onclick="resetSliders()">Reset</button>
+        <button type="submit" class="btn">Save Pose</button>
+        <button type="button" class="btn">Run Pose</button>
+      </div>
+    </form>
+    </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Motor 1</th>
+        <th>Motor 2</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>90</td>
+        <td>115</td>
+        <td>
+          <button class="action-btn">Load</button>
+          <button class="action-btn">Remove</button>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>45</td>
+        <td>60</td>
+        <td>
+          <button class="action-btn">Load</button>
+          <button class="action-btn">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<script>
+  const motor1Slider = document.getElementById('motor1Slider');
+  const motor2Slider = document.getElementById('motor2Slider');
+  const motor1Value = document.getElementById('motor1Value');
+  const motor2Value = document.getElementById('motor2Value');
+
+  motor1Slider.oninput = () => motor1Value.textContent = motor1Slider.value;
+  motor2Slider.oninput = () => motor2Value.textContent = motor2Slider.value;
+
+  function resetSliders() {
+    motor1Slider.value = 90;
+    motor2Slider.value = 90;
+    motor1Value.textContent = 90;
+    motor2Value.textContent = 90;
+  }
+</script>
+
+</body>
+</html>
+
