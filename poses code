@@ -1,0 +1,30 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "robot_arm_control";
+
+$conn = new mysqli($host, $user, $pass, $db);
+if ($conn->connect_error) {
+    die("فشل الاتصال: " . $conn->connect_error);
+}
+
+$motor1 = $_POST['motor1'];
+$motor2 = $_POST['motor2'];
+
+$sql = "INSERT INTO poses1 (motor1, motor2) VALUES ('$motor1', '$motor2')";
+
+
+if ($conn->query($sql) === TRUE) {
+    echo "✅ تم حفظ البيانات بنجاح.";
+} else {
+    echo "❌ حدث خطأ: " . $conn->error;
+}
+
+$conn->close();
+?>
